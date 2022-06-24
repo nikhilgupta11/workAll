@@ -1,0 +1,10 @@
+.msg.notifications {
+    background: #FFFFFF !important;
+    box-shadow: var(--collected-product-box-shadow, 0px 4px 5000px rgba(11, 17, 27, 0.1));
+    overflow: hidden;
+    max-width: 630px;
+    width: 100%;
+    textarea#first-name {
+        padding: 10px 20px;
+    }
+}

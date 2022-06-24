@@ -1,0 +1,36 @@
+.cart-page {
+    .clear{
+        width: 100px;
+        font-size: 14px;
+        border-radius: 5px;
+        height:40px;
+    }
+     .sf-collected-product {
+         &:hover::after {
+             content: unset !important;
+         }
+         .sf-circle-icon {
+             display: none;
+         }
+         .sf-collected-product__actions {
+             display: none;
+         }
+     }
+ }
+ #cart{
+    
+     .sf-circle-icon {
+         // display: none;
+         padding: 3px;
+         height: 24px;
+         width: 24px;
+         --icon-size: 1rem;
+     }
+     a.clear{
+         margin-left: 135px;
+         text-decoration: underline;
+         font-weight: 300 bold;
+         color: #037EE6;
+     }
+ }
+ 

@@ -1,0 +1,872 @@
+<template>
+  <ValidationObserver v-slot="{ handleSubmit, reset }">
+    <!-- <p>haloo</p> -->
+    <!-- <h1>{{getInvoiceCheck}}</h1> -->
+    <!-- <h1>{{sameAsShipping}}</h1> -->
+    <!-- <h1>{{billingDetails}}</h1> -->
+    <h1>{{oldBilling}}</h1>
+    <AwHeading
+      v-e2e="'heading-billing'"
+      :level="3"
+      :title="$t('Billing Details')"
+      class="sf-heading--left sf-heading--no-underline title"
+    />
+
+    <form @submit.prevent="handleSubmit(handleAddressSubmit(reset))">
+      <AwCheckbox
+        v-e2e="'copy-address'"
+        :selected="sameAsShipping"
+        :label="$t('Copy address from shipping')"
+        name="copyShippingAddress"
+        class="form__element"
+        @change="handleCheckSameAddress"
+      />
+      <div v-if="sameAsShipping" class="copy__shipping__addresses">
+        <div class="copy__shipping__address">
+          <div class="sf-address">
+            <UserAddressDetails
+              :address="{
+                ...billingDetails,
+                region: { region_code: billingDetails.region },
+              }"
+            />
+          </div>
+        </div>
+      </div>
+      <UserBillingAddresses
+        v-if="!sameAsShipping && isAuthenticated && hasSavedBillingAddress"
+        v-model="setAsDefault"
+        v-e2e="'billing-addresses'"
+        :current-address-id="currentAddressId || NOT_SELECTED_ADDRESS"
+        @setCurrentAddress="handleSetCurrentAddress"
+      />
+      <div v-if="!sameAsShipping && canAddNewAddress" class="form">
+        <ValidationProvider
+          v-slot="{ errors }"
+          name="firstname"
+          rules="required|min:2"
+          slim
+        >
+          <AwInput
+            v-e2e="'firstName'"
+            :value="billingDetails.firstname"
+            label="First name"
+            name="firstName"
+            class="form__element form__element--half"
+            required
+            :valid="!errors[0]"
+            :error-message="$t(errors[0])"
+            @input="(firstname) => changeBillingDetails('firstname', firstname)"
+          />
+        </ValidationProvider>
+        <ValidationProvider
+          v-slot="{ errors }"
+          name="lastname"
+          rules="required|min:2"
+          slim
+        >
+          <AwInput
+            v-e2e="'lastName'"
+            :value="billingDetails.lastname"
+            label="Last name"
+            name="lastName"
+            class="form__element form__element--half form__element--half-even"
+            required
+            :valid="!errors[0]"
+            :error-message="$t(errors[0])"
+            @input="(lastname) => changeBillingDetails('lastname', lastname)"
+          />
+        </ValidationProvider>
+        <ValidationProvider
+          v-slot="{ errors }"
+          name="street"
+          rules="required"
+          slim
+        >
+          <AwInput
+            v-e2e="'streetName'"
+            :value="billingDetails.street"
+            label="Street name"
+            name="streetName"
+            class="form__element form"
+            required
+            :valid="!errors[0]"
+            :error-message="$t(errors[0])"
+            @input="(street) => changeBillingDetails('street', street)"
+          />
+        </ValidationProvider>
+        <ValidationProvider
+          v-slot="{ errors }"
+          name="city"
+          rules="required|min:2"
+          slim
+        >
+          <AwInput
+            v-e2e="'city'"
+            :value="billingDetails.city"
+            label="City"
+            name="city"
+            class="form__element form__element--half"
+            required
+            :valid="!errors[0]"
+            :error-message="$t(errors[0])"
+            @input="(city) => changeBillingDetails('city', city)"
+          />
+        </ValidationProvider>
+        <ValidationProvider
+          v-slot="{ errors }"
+          name="state"
+          :rules="!regionInformation ? null : 'required|min:2'"
+          slim
+        >
+          <AwInput
+            v-if="
+              !billingDetails.country_code || regionInformation.length === 0
+            "
+            v-model="billingDetails.region"
+            v-e2e="'state'"
+            label="State/Province"
+            required
+            :valid="!errors[0]"
+            :error-message="$t(errors[0])"
+            :disabled="!billingDetails.country_code"
+            name="state"
+            class="form__element form__element--half form__element--half-even"
+            @input="(region) => changeBillingDetails('region', region)"
+          />
+          <AwSelect
+            v-else
+            v-model="billingDetails.region"
+            v-e2e="'state'"
+            label="State/Province"
+            name="state"
+            required
+            :valid="!errors[0]"
+            :error-message="$t(errors[0])"
+            class="
+              form__element
+              form__element--half
+              form__element--half-even
+              form__select
+              sf-select--underlined
+            "
+            @input="(state) => changeBillingDetails('region', state)"
+          >
+            <AwSelectOption
+              v-for="regionOption in regionInformation"
+              :key="regionOption.id"
+              :value="regionOption.abbreviation"
+            >
+              {{ regionOption.label }}
+            </AwSelectOption>
+          </AwSelect>
+        </ValidationProvider>
+        <ValidationProvider
+          v-slot="{ errors }"
+          name="postcode"
+          rules="required|min:2"
+          slim
+        >
+          <AwInput
+            v-e2e="'zipcode'"
+            :value="billingDetails.postcode"
+            label="Zip-code"
+            name="zipCode"
+            class="form__element form__element--half"
+            required
+            :valid="!errors[0]"
+            :error-message="$t(errors[0])"
+            @input="(postcode) => changeBillingDetails('postcode', postcode)"
+          />
+        </ValidationProvider>
+        <ValidationProvider
+          v-slot="{ errors }"
+          name="country_code"
+          rules="required|min:2"
+          slim
+        >
+          <AwSelect
+            v-e2e="'country'"
+            :value="billingDetails.country_code"
+            label="Country"
+            name="country"
+            class="
+              form__element form__element--half form__select
+              sf-select--underlined
+              form__element--half-even
+            "
+            required
+            :valid="!errors[0]"
+            :error-message="$t(errors[0])"
+            @input="changeCountry"
+          >
+            <AwSelectOption
+              v-for="countryOption in countriesList"
+              :key="countryOption.id"
+              :value="countryOption.abbreviation"
+            >
+              {{ countryOption.label }}
+            </AwSelectOption>
+          </AwSelect>
+        </ValidationProvider>
+        <ValidationProvider
+          v-slot="{ errors }"
+          name="telephone"
+          rules="required"
+          slim
+        >
+          <AwInput
+            v-e2e="'phone'"
+            :value="billingDetails.telephone"
+            label="Phone number"
+            name="phone"
+            class="form__element form__element--half"
+            required
+            :valid="!errors[0]"
+            :error-message="$t(errors[0])"
+            @input="(telephone) => changeBillingDetails('telephone', telephone)"
+          />
+        </ValidationProvider>
+      </div>
+      <div class="checkBox">
+        <AwCheckbox
+          v-e2e="'generate-invoice'"
+          label="I want to generate invoice for company."
+          name="generateInvoice"
+          class="form__element sf-checkbox"
+        />
+      </div>
+      <div>
+        <AwCheckbox
+          v-if="sameAsShipping == true"
+          v-e2e="'set-default'"
+          label="Use this billing address as my default one."
+          name="setAddressDefault"
+          class="form__element"
+        />
+      </div>
+
+      <div class="pay">
+        <p>Payment Methods</p>
+      </div>
+      <div class="lii">
+        <div class="one select-payment" @click="showForm = true">
+          <AwRadio
+            name="visa"
+            value="store"
+            :disabled="false"
+            selected=""
+            :required="false"
+          />
+
+          <nuxt-img
+            src="/icons/visa1.png"
+            class="payment-method"
+            alt="visa"
+            width="52"
+            height="34"
+          />
+        </div>
+
+        <div class="one select-payment" @click="showForm = true">
+          <AwRadio
+            name="visa"
+            value="store"
+            :disabled="false"
+            selected=""
+            :required="false"
+          />
+          <nuxt-img
+            src="/icons/mas2.png"
+            class="payment-method"
+            alt="mas"
+            width="52"
+            height="34"
+          />
+        </div>
+
+        <div class="one select-payment" @click="showForm = true">
+          <AwRadio
+            name="visa"
+            value="store"
+            :disabled="false"
+            selected=""
+            :required="false"
+          />
+          <nuxt-img
+            src="/icons/visa3.png"
+            class="payment-method"
+            alt="visa"
+            width="75"
+            height="34"
+          />
+        </div>
+
+        <div class="one select-payment" @click="showForm = false">
+          <AwRadio
+            name="visa"
+            value="store"
+            :disabled="false"
+            selected=""
+            :required="false"
+          />
+          <a href="#" class="payment-method">Cash On Delivery</a>
+        </div>
+
+        <div class="one select-payment" @click="showForm = false">
+          <AwRadio
+            name="visa"
+            value="store"
+            :disabled="false"
+            selected=""
+            :required="false"
+          />
+          <a href="#" class="payment-method">Cheque</a>
+        </div>
+      </div>
+      <template>
+        <form class="bil" v-if="showForm">
+          <AwInput
+            label="Card Number"
+            name="cardnumber"
+            class="form__control"
+            required
+          />
+          <AwInput
+            label="Card Holder"
+            name="cardholder"
+            class="form__control"
+            required
+          />
+          <div class="dis">
+            <label id="ed">Expiry Date :</label>
+            <select class="form__control for">
+              <option value="23">MM</option>
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+            <select class="form__control for" name="yy">
+              <option value="22">YYYY</option>
+              <option value="16">2021</option>
+              <option value="17">2022</option>
+              <option value="18">2023</option>
+              <option value="19">2024</option>
+              <option value="20">2025</option>
+              <option value="21">2026</option>
+            </select>
+          </div>
+          <div class="dis">
+            <AwInput
+              label="Code CVC "
+              name="cardnumber"
+              class="form__control for"
+              required
+            />
+            <a href="#"><u>Where I find CVC code?</u></a>
+          </div>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="flexCheckDefault"
+          />Save this card for other purchases.
+        </form>
+      </template>
+      <AwButton
+        v-if="sameAsShipping == true"
+        class="color-light sf-button"
+        type="submit"
+        @click="handleAddNewAddressBtnClick"
+      >
+        {{ $t("Add new address") }}
+      </AwButton>
+
+      <div class="form">
+        <div class="form__action">
+          <AwButton
+            v-e2e="'continue-to-payment'"
+            class="form__action-button extend"
+            type="submit"
+            :disabled="!canMoveForward"
+          >
+            {{ $t("Pay for Order") }}
+          </AwButton>
+
+          <nuxt-link
+            to="localePath('/checkout/shipping')"
+            class="
+              sf-button sf-button--underlined
+              form__back-button
+              smartphone-only
+            "
+          >
+            {{ $t("Go back") }}
+          </nuxt-link>
+        </div>
+      </div>
+    </form>
+  </ValidationObserver>
+</template>
+
+<script>
+import AwRadio from "@storefront-ui/root/packages/vue/src/components/molecules/AwRadio/AwRadio.vue";
+import AwHeading from "@storefront-ui/root/packages/vue/src/components/atoms/AwHeading/AwHeading.vue";
+import AwInput from "@storefront-ui/root/packages/vue/src/components/atoms/AwInput/AwInput.vue";
+import AwButton from "@storefront-ui/root/packages/vue/src/components/atoms/AwButton/AwButton.vue";
+import AwSelect from "@storefront-ui/root/packages/vue/src/components/molecules/AwSelect/AwSelect.vue";
+import AwCheckbox from "@storefront-ui/root/packages/vue/src/components/molecules/AwCheckbox/AwCheckbox.vue";
+
+import {
+  useUserBilling,
+  userBillingGetters,
+  useUser,
+  useBilling,
+  useShipping,
+  useCountrySearch,
+  addressGetter,
+} from "@vue-storefront/magento";
+import { ValidationProvider, ValidationObserver, extend } from "vee-validate";
+import { required, min, digits } from "vee-validate/dist/rules";
+import {
+  ref,
+  computed,
+  onMounted,
+  watch,
+  useRouter,
+  defineComponent,
+  useContext,
+} from "@nuxtjs/composition-api";
+import UserAddressDetails from "~/components/UserAddressDetails.vue";
+import {
+  addressFromApiToForm,
+  formatAddressReturnToData,
+} from "~/helpers/checkout/address";
+import { mergeItem } from "~/helpers/asyncLocalStorage";
+import { isPreviousStepValid } from "~/helpers/checkout/steps";
+
+const NOT_SELECTED_ADDRESS = "";
+
+extend("required", {
+  ...required,
+  message: "This field is required",
+});
+extend("min", {
+  ...min,
+  message: "The field should have at least {length} characters",
+});
+extend("digits", {
+  ...digits,
+  message: "Please provide a valid phone number",
+});
+
+export default defineComponent({
+  name: "BillingStep",
+  components: {
+    AwHeading,
+    AwInput,
+    AwSelect,
+    AwCheckbox,
+    AwButton,
+    ValidationProvider,
+    ValidationObserver,
+    AwRadio,
+    UserBillingAddresses: () =>
+      import("~/components/Checkout/UserBillingAddresses.vue"),
+    UserAddressDetails,
+  },
+  setup() {
+    const invoiceCheck = ref(false);
+    const showForm = ref(false);
+    const router = useRouter();
+
+    const { app } = useContext();
+
+    const { load, save, loading, billing: address } = useBilling();
+    const {
+      billing: userBilling,
+      load: loadUserBilling,
+      setDefaultAddress,
+    } = useUserBilling();
+    const { shipping: shippingDetails, load: loadShipping } = useShipping();
+    const {
+      load: loadCountries,
+      countries,
+      search: searchCountry,
+      country,
+    } = useCountrySearch("Step:Billing");
+    const { isAuthenticated } = useUser();
+    let oldBilling = null;
+    const sameAsShipping = ref(false);
+    const billingDetails = ref(addressFromApiToForm(address.value) || {});
+    const currentAddressId = ref(NOT_SELECTED_ADDRESS);
+
+    const setAsDefault = ref(false);
+    const isFormSubmitted = ref(false);
+    const canAddNewAddress = ref(true);
+
+    const isBillingDetailsStepCompleted = ref(false);
+
+    const canMoveForward = computed(
+      () =>
+        !loading.value &&
+        billingDetails.value &&
+        Object.keys(billingDetails.value).length > 0
+    );
+
+    const hasSavedBillingAddress = computed(() => {
+      if (!isAuthenticated.value || !userBilling.value) {
+        return false;
+      }
+      const addresses = userBillingGetters.getAddresses(userBilling.value);
+      return Boolean(addresses?.length);
+    });
+
+    const countriesList = computed(() =>
+      addressGetter.countriesList(countries.value)
+    );
+
+    const regionInformation = computed(() =>
+      addressGetter.regionList(country.value)
+    );
+
+    const getInvoiceCheck = computed(() => invoiceCheck.value);
+
+    const handleAddressSubmit = (reset) => async () => {
+      const addressId = currentAddressId.value;
+      const billingDetailsData = {
+        billingDetails: {
+          ...billingDetails.value,
+          customerAddressId: addressId,
+          sameAsShipping: sameAsShipping.value,
+        },
+      };
+      await save(billingDetailsData);
+      if (addressId !== NOT_SELECTED_ADDRESS && setAsDefault.value) {
+        const chosenAddress = userBillingGetters.getAddresses(
+          userBilling.value,
+          { id: addressId }
+        );
+        if (chosenAddress && chosenAddress.length > 0) {
+          await setDefaultAddress({ address: chosenAddress[0] });
+        }
+      }
+      reset();
+      await mergeItem("checkout", { billing: billingDetailsData });
+      await router.push(`${app.localePath("/checkout/payment")}`);
+      isBillingDetailsStepCompleted.value = true;
+    };
+
+    const handleCheckSameAddress = async () => {
+      sameAsShipping.value = !sameAsShipping.value;
+      if (sameAsShipping.value) {
+        if (!shippingDetails.value) {
+          await loadShipping();
+
+          await searchCountry({ id: shippingDetails.value.country_code });
+        }
+        oldBilling = { ...billingDetails.value };
+        console.log(oldBilling)
+        
+        billingDetails.value = {
+          ...formatAddressReturnToData(shippingDetails.value),
+        };
+        currentAddressId.value = NOT_SELECTED_ADDRESS;
+        setAsDefault.value = false;
+        if (billingDetails.value.country_code) {
+          await searchCountry({ id: billingDetails?.value.country_code });
+        }
+        return;
+      }
+      billingDetails.value = oldBilling;
+      if (billingDetails.value.country_code) {
+        await searchCountry({ id: billingDetails?.value.country_code });
+      }
+      // console.log(billingDetails.value)
+      // console.log(oldBilling)
+    };
+    // console.log(handleCheckSameAddress)
+    const handleAddNewAddressBtnClick = () => {
+      currentAddressId.value = NOT_SELECTED_ADDRESS;
+      billingDetails.value = {};
+      canAddNewAddress.value = true;
+      isBillingDetailsStepCompleted.value = false;
+    };
+
+    const handleSetCurrentAddress = (addr) => {
+      billingDetails.value = { ...addressFromApiToForm(addr) };
+      currentAddressId.value = addr?.id;
+      canAddNewAddress.value = false;
+      isBillingDetailsStepCompleted.value = false;
+    };
+
+    const changeBillingDetails = (field, value) => {
+      billingDetails.value = {
+        ...billingDetails.value,
+        [field]: value,
+      };
+      isBillingDetailsStepCompleted.value = false;
+      currentAddressId.value = NOT_SELECTED_ADDRESS;
+    };
+
+    const selectDefaultAddress = () => {
+      const defaultAddress = userBillingGetters.getAddresses(
+        userBilling.value,
+        { default_billing: true }
+      );
+      if (defaultAddress && defaultAddress.length > 0) {
+        handleSetCurrentAddress(defaultAddress[0]);
+      }
+    };
+
+    const changeCountry = async (id) => {
+      changeBillingDetails("country_code", id);
+      await searchCountry({ id });
+    };
+
+    const invoiceCheckToggle = () => {
+      console.log(invoiceCheck.value);
+      invoiceCheck.value = !invoiceCheck.value;
+      console.log(invoiceCheck.value);
+    };
+
+    watch(address, (addr) => {
+      billingDetails.value = addressFromApiToForm(addr || {});
+    });
+
+    onMounted(async () => {
+      const validStep = await isPreviousStepValid("shipping");
+
+      // if (!validStep) {
+      //   await router.push(app.localePath("/checkout/user-account"));
+      // }
+
+      await Promise.all([loadCountries(), load()]);
+
+      if (billingDetails.value?.country_code) {
+        await searchCountry({ id: billingDetails.value.country_code });
+      }
+
+      if (!userBilling.value?.addresses && isAuthenticated.value) {
+        await loadUserBilling();
+      }
+      const billingAddresses = userBillingGetters.getAddresses(
+        userBilling.value
+      );
+
+      if (!billingAddresses || billingAddresses.length === 0) {
+        return;
+      }
+
+      const hasEmptyBillingDetails =
+        !billingDetails.value || Object.keys(billingDetails.value).length === 0;
+      if (hasEmptyBillingDetails) {
+        selectDefaultAddress();
+        return;
+      }
+      canAddNewAddress.value = false;
+    });
+
+    return {
+      canAddNewAddress,
+      canMoveForward,
+      changeCountry,
+      changeBillingDetails,
+      countriesList,
+      country,
+      currentAddressId,
+      handleAddNewAddressBtnClick,
+      handleAddressSubmit,
+      handleSetCurrentAddress,
+      handleCheckSameAddress,
+      hasSavedBillingAddress,
+      isAuthenticated,
+      isFormSubmitted,
+      isBillingDetailsStepCompleted,
+      load,
+      loading,
+      NOT_SELECTED_ADDRESS,
+      regionInformation,
+      searchCountry,
+      setAsDefault,
+      billingDetails,
+      sameAsShipping,
+
+      invoiceCheck,
+      invoiceCheckToggle,
+      getInvoiceCheck,
+      showForm,
+      oldBilling
+    };
+  },
+});
+</script>
+<style lang="scss" scoped>
+.title {
+  margin: var(--spacer-xl) 0 var(--spacer-base) 0;
+  --heading-title-font-weight: var(--font-weight--bold);
+}
+
+.copy__shipping {
+  &__address {
+    margin-bottom: var(--spacer-xs);
+    @include for-desktop {
+      margin-right: var(--spacer-sm);
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .sf-address {
+      padding: var(--spacer-xs);
+    }
+  }
+
+  &__addresses {
+    margin-bottom: var(--spacer-xl);
+    @include for-desktop {
+      display: flex;
+    }
+  }
+}
+
+.form {
+  &__select {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    --select-option-font-size: var(--font-size--lg);
+
+    ::v-deep .sf-select__dropdown {
+      font-size: var(--font-size--lg);
+      margin: 0;
+      color: var(--c-text);
+      font-family: var(--font-family--secondary);
+      font-weight: var(--font-weight--normal);
+    }
+
+    ::v-deep .sf-select__label {
+      left: initial;
+    }
+  }
+
+  @include for-desktop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__element {
+    margin: 0 0 var(--spacer-xl) 0;
+    @include for-desktop {
+      flex: 0 0 100%;
+    }
+
+    &--half {
+      @include for-desktop {
+        flex: 1 1 50%;
+      }
+
+      &-even {
+        @include for-desktop {
+          padding: 0 0 0 var(--spacer-xl);
+        }
+      }
+    }
+  }
+
+  &__group {
+    display: flex;
+    align-items: center;
+  }
+
+  &__action {
+    @include for-desktop {
+      flex: 0 0 100%;
+      display: flex;
+    }
+  }
+
+  &__action-button {
+    width: 100%;
+    @include for-desktop {
+      width: 25rem;
+    }
+
+    &--add-address {
+      width: 100%;
+      margin: 0 0 var(--spacer-sm) 0;
+      @include for-desktop {
+        margin: 0 0 var(--spacer-lg) 0;
+        width: auto;
+      }
+    }
+  }
+
+  &__back-button {
+    width: 100%;
+    margin: var(--spacer-sm) 0 var(--spacer-xl);
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+.select-payment {
+  align-items: center !important;
+
+  .payment-method {
+    margin-left: 8px;
+  }
+  img.payment-method {
+    width: 52px;
+    height: 34px;
+    object-fit: contain;
+  }
+}
+</style>
+
+<style lang=scss>
+.sf-checkbox.is-active {
+    --checkbox-border-color: var(--c-primary);
+    --checkbox-background: #037EE6;
+}
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+</style>
+

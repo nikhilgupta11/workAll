@@ -1,0 +1,86 @@
+.extend {
+    margin-top: 50px;
+}
+
+.shipping-provider {
+    .sf-radio.sf-radio--transparent {
+        z-index: 1;
+    }
+    .accordion {
+        z-index: 999999;
+    }
+}
+
+.one {
+    display: flex;
+    height: 20PX;
+    padding: 5px;
+    margin: 10px;
+}
+
+.lii {
+    display: flex;
+    border-top: 2px solid #EFEFEF;
+    border-bottom: 2px solid #EFEFEF;
+    width: 768px;
+    height: 74px;
+    padding-top: 12px;
+}
+
+.pay {
+    width: 228px;
+    // height: 32px;
+    font-weight: 600, bold;
+    font-size: 1.7rem;
+}
+
+.form__control {
+    border: none;
+    // border-color: #EFEFEF;
+    border-bottom: 1px solid #3c3c3c;
+    height: 50px;
+    margin: 10px;
+}
+
+form.bil {
+    margin-top: 55px;
+    width: 610px;
+    .sf-input input {
+        border-color: transparent !important;
+        &:focus-visible {
+            outline: unset !important;
+        }
+    }
+    label.sf-input__label {
+        font-size: 16px;
+        color: #3C3C3C;
+    }
+    .sf-input__label {
+        top: 60% !important;
+    }
+    .for {
+        width: 216px;
+    }
+    .dis {
+        display: flex;
+    }
+    a {
+        margin: 35px 0 0 55px;
+        color: #037EE6;
+    }
+    select {
+        background-color: white;
+    }
+    #ed {
+        margin: 30px 40px 0 10px;
+        font-size: 16px;
+        font-weight: 400, regular;
+        font: source sans pro;
+    }
+    .form-check-input {
+        // width: 258px;
+        margin-top: 24px;
+        font-size: 16px;
+        font-weight: 400, regular;
+    }
+}

@@ -1,0 +1,21 @@
+.customer_service {
+  .sf-tabs__title{
+    color: #3C3C3C;
+  
+    left: 0%;
+    right: 78.65%;
+    top: 0%;
+    bottom: 23.81%;
+
+    font-family: "Source Sans Pro";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+  }
+  .sf-tabs__title.is-active{
+    color:#282828;
+  }
+}

@@ -1,0 +1,532 @@
+[
+  {
+    "name": "home___default",
+    "path": "/default",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Home.vue",
+    "_name": "_2725fc46"
+  },
+  {
+    "name": "home___german",
+    "path": "/german",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Home.vue",
+    "_name": "_2725fc46"
+  },
+  {
+    "name": "cart___default",
+    "path": "/default/cart",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Cart.vue",
+    "_name": "_09cb7f9e"
+  },
+  {
+    "name": "Cart___default",
+    "path": "/default/Cart",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Cart.vue",
+    "chunkName": "pages/Cart",
+    "_name": "_09cb7f9e"
+  },
+  {
+    "name": "Category___default",
+    "path": "/default/Category",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Category.vue",
+    "chunkName": "pages/Category",
+    "_name": "_16203f7c"
+  },
+  {
+    "name": "checkout___default",
+    "path": "/default/checkout",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout.vue",
+    "children": [
+      {
+        "path": "billing",
+        "name": "billing___default",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Billing.vue",
+        "_name": "_4640f110"
+      },
+      {
+        "path": "external-thank-you",
+        "name": "external-thank-you___default",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/ExternalCheckoutThankYou.vue",
+        "_name": "_048b39e1"
+      },
+      {
+        "path": "payment",
+        "name": "payment___default",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Payment.vue",
+        "_name": "_361f79ca"
+      },
+      {
+        "path": "shipping",
+        "name": "shipping___default",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Shipping.vue",
+        "_name": "_7cd1312e"
+      },
+      {
+        "path": "thank-you",
+        "name": "thank-you___default",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/ThankYou.vue",
+        "_name": "_a9b599e0"
+      },
+      {
+        "path": "user-account",
+        "name": "user-account___default",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/UserAccount.vue",
+        "_name": "_c3dbaf12"
+      }
+    ],
+    "_name": "_53e76bc4"
+  },
+  {
+    "name": "Checkout___default",
+    "path": "/default/Checkout",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout.vue",
+    "chunkName": "pages/Checkout",
+    "children": [
+      {
+        "name": "Checkout-Billing___default",
+        "path": "Billing",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Billing.vue",
+        "chunkName": "pages/Checkout/Billing",
+        "_name": "_4640f110"
+      },
+      {
+        "name": "Checkout-ExternalCheckoutThankYou___default",
+        "path": "ExternalCheckoutThankYou",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/ExternalCheckoutThankYou.vue",
+        "chunkName": "pages/Checkout/ExternalCheckoutThankYou",
+        "_name": "_048b39e1"
+      },
+      {
+        "name": "Checkout-Payment___default",
+        "path": "Payment",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Payment.vue",
+        "chunkName": "pages/Checkout/Payment",
+        "_name": "_361f79ca"
+      },
+      {
+        "name": "Checkout-Shipping___default",
+        "path": "Shipping",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Shipping.vue",
+        "chunkName": "pages/Checkout/Shipping",
+        "_name": "_7cd1312e"
+      },
+      {
+        "name": "Checkout-ThankYou___default",
+        "path": "ThankYou",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/ThankYou.vue",
+        "chunkName": "pages/Checkout/ThankYou",
+        "_name": "_a9b599e0"
+      },
+      {
+        "name": "Checkout-UserAccount___default",
+        "path": "UserAccount",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/UserAccount.vue",
+        "chunkName": "pages/Checkout/UserAccount",
+        "_name": "_c3dbaf12"
+      }
+    ],
+    "_name": "_53e76bc4"
+  },
+  {
+    "name": "contact___default",
+    "path": "/default/contact",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/ContactForm.vue",
+    "_name": "_13a71614"
+  },
+  {
+    "name": "ContactForm___default",
+    "path": "/default/ContactForm",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/ContactForm.vue",
+    "chunkName": "pages/ContactForm",
+    "_name": "_13a71614"
+  },
+  {
+    "name": "Home___default",
+    "path": "/default/Home",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Home.vue",
+    "chunkName": "pages/Home",
+    "_name": "_2725fc46"
+  },
+  {
+    "name": "MyAccount___default",
+    "path": "/default/MyAccount",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount.vue",
+    "chunkName": "pages/MyAccount",
+    "children": [
+      {
+        "name": "MyAccount-AddressesDetails___default",
+        "path": "AddressesDetails",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/AddressesDetails.vue",
+        "chunkName": "pages/MyAccount/AddressesDetails",
+        "_name": "_00d56acc"
+      },
+      {
+        "name": "MyAccount-BillingDetails___default",
+        "path": "BillingDetails",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/BillingDetails.vue",
+        "chunkName": "pages/MyAccount/BillingDetails",
+        "_name": "_6a88c15a"
+      },
+      {
+        "name": "MyAccount-MyNewsletter___default",
+        "path": "MyNewsletter",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/MyNewsletter.vue",
+        "chunkName": "pages/MyAccount/MyNewsletter",
+        "_name": "_a7c1e4de"
+      },
+      {
+        "name": "MyAccount-MyProfile___default",
+        "path": "MyProfile",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/MyProfile.vue",
+        "chunkName": "pages/MyAccount/MyProfile",
+        "_name": "_333edd01"
+      },
+      {
+        "name": "MyAccount-MyReviews___default",
+        "path": "MyReviews",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/MyReviews.vue",
+        "chunkName": "pages/MyAccount/MyReviews",
+        "_name": "_7ac1be73"
+      },
+      {
+        "name": "MyAccount-MyWishlist___default",
+        "path": "MyWishlist",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/MyWishlist.vue",
+        "chunkName": "pages/MyAccount/MyWishlist",
+        "_name": "_46a9eec6"
+      },
+      {
+        "name": "MyAccount-OrderHistory___default",
+        "path": "OrderHistory",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/OrderHistory.vue",
+        "chunkName": "pages/MyAccount/OrderHistory",
+        "_name": "_f137a21c"
+      },
+      {
+        "name": "MyAccount-ShippingDetails___default",
+        "path": "ShippingDetails",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/ShippingDetails.vue",
+        "chunkName": "pages/MyAccount/ShippingDetails",
+        "_name": "_3c93b2d8"
+      }
+    ],
+    "_name": "_642052d3"
+  },
+  {
+    "name": "Page___default",
+    "path": "/default/Page",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Page.vue",
+    "chunkName": "pages/Page",
+    "_name": "_3ca2178d"
+  },
+  {
+    "name": "Product___default",
+    "path": "/default/Product",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Product.vue",
+    "chunkName": "pages/Product",
+    "_name": "_1d83073e"
+  },
+  {
+    "name": "reset-password___default",
+    "path": "/default/reset-password",
+    "alias": "/customer/account/createPassword",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/ResetPassword.vue",
+    "_name": "_71cf0908"
+  },
+  {
+    "name": "ResetPassword___default",
+    "path": "/default/ResetPassword",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/ResetPassword.vue",
+    "chunkName": "pages/ResetPassword",
+    "_name": "_71cf0908"
+  },
+  {
+    "name": "Shipping___default",
+    "path": "/default/Shipping",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Shipping.vue",
+    "chunkName": "pages/Shipping",
+    "_name": "_360eefa8"
+  },
+  {
+    "name": "cart___german",
+    "path": "/german/cart",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Cart.vue",
+    "_name": "_09cb7f9e"
+  },
+  {
+    "name": "Cart___german",
+    "path": "/german/Cart",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Cart.vue",
+    "chunkName": "pages/Cart",
+    "_name": "_09cb7f9e"
+  },
+  {
+    "name": "Category___german",
+    "path": "/german/Category",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Category.vue",
+    "chunkName": "pages/Category",
+    "_name": "_16203f7c"
+  },
+  {
+    "name": "checkout___german",
+    "path": "/german/checkout",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout.vue",
+    "children": [
+      {
+        "path": "billing",
+        "name": "billing___german",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Billing.vue",
+        "_name": "_4640f110"
+      },
+      {
+        "path": "external-thank-you",
+        "name": "external-thank-you___german",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/ExternalCheckoutThankYou.vue",
+        "_name": "_048b39e1"
+      },
+      {
+        "path": "payment",
+        "name": "payment___german",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Payment.vue",
+        "_name": "_361f79ca"
+      },
+      {
+        "path": "shipping",
+        "name": "shipping___german",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Shipping.vue",
+        "_name": "_7cd1312e"
+      },
+      {
+        "path": "thank-you",
+        "name": "thank-you___german",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/ThankYou.vue",
+        "_name": "_a9b599e0"
+      },
+      {
+        "path": "user-account",
+        "name": "user-account___german",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/UserAccount.vue",
+        "_name": "_c3dbaf12"
+      }
+    ],
+    "_name": "_53e76bc4"
+  },
+  {
+    "name": "Checkout___german",
+    "path": "/german/Checkout",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout.vue",
+    "chunkName": "pages/Checkout",
+    "children": [
+      {
+        "name": "Checkout-Billing___german",
+        "path": "Billing",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Billing.vue",
+        "chunkName": "pages/Checkout/Billing",
+        "_name": "_4640f110"
+      },
+      {
+        "name": "Checkout-ExternalCheckoutThankYou___german",
+        "path": "ExternalCheckoutThankYou",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/ExternalCheckoutThankYou.vue",
+        "chunkName": "pages/Checkout/ExternalCheckoutThankYou",
+        "_name": "_048b39e1"
+      },
+      {
+        "name": "Checkout-Payment___german",
+        "path": "Payment",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Payment.vue",
+        "chunkName": "pages/Checkout/Payment",
+        "_name": "_361f79ca"
+      },
+      {
+        "name": "Checkout-Shipping___german",
+        "path": "Shipping",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/Shipping.vue",
+        "chunkName": "pages/Checkout/Shipping",
+        "_name": "_7cd1312e"
+      },
+      {
+        "name": "Checkout-ThankYou___german",
+        "path": "ThankYou",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/ThankYou.vue",
+        "chunkName": "pages/Checkout/ThankYou",
+        "_name": "_a9b599e0"
+      },
+      {
+        "name": "Checkout-UserAccount___german",
+        "path": "UserAccount",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Checkout/UserAccount.vue",
+        "chunkName": "pages/Checkout/UserAccount",
+        "_name": "_c3dbaf12"
+      }
+    ],
+    "_name": "_53e76bc4"
+  },
+  {
+    "name": "contact___german",
+    "path": "/german/contact",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/ContactForm.vue",
+    "_name": "_13a71614"
+  },
+  {
+    "name": "ContactForm___german",
+    "path": "/german/ContactForm",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/ContactForm.vue",
+    "chunkName": "pages/ContactForm",
+    "_name": "_13a71614"
+  },
+  {
+    "name": "Home___german",
+    "path": "/german/Home",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Home.vue",
+    "chunkName": "pages/Home",
+    "_name": "_2725fc46"
+  },
+  {
+    "name": "MyAccount___german",
+    "path": "/german/MyAccount",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount.vue",
+    "chunkName": "pages/MyAccount",
+    "children": [
+      {
+        "name": "MyAccount-AddressesDetails___german",
+        "path": "AddressesDetails",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/AddressesDetails.vue",
+        "chunkName": "pages/MyAccount/AddressesDetails",
+        "_name": "_00d56acc"
+      },
+      {
+        "name": "MyAccount-BillingDetails___german",
+        "path": "BillingDetails",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/BillingDetails.vue",
+        "chunkName": "pages/MyAccount/BillingDetails",
+        "_name": "_6a88c15a"
+      },
+      {
+        "name": "MyAccount-MyNewsletter___german",
+        "path": "MyNewsletter",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/MyNewsletter.vue",
+        "chunkName": "pages/MyAccount/MyNewsletter",
+        "_name": "_a7c1e4de"
+      },
+      {
+        "name": "MyAccount-MyProfile___german",
+        "path": "MyProfile",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/MyProfile.vue",
+        "chunkName": "pages/MyAccount/MyProfile",
+        "_name": "_333edd01"
+      },
+      {
+        "name": "MyAccount-MyReviews___german",
+        "path": "MyReviews",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/MyReviews.vue",
+        "chunkName": "pages/MyAccount/MyReviews",
+        "_name": "_7ac1be73"
+      },
+      {
+        "name": "MyAccount-MyWishlist___german",
+        "path": "MyWishlist",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/MyWishlist.vue",
+        "chunkName": "pages/MyAccount/MyWishlist",
+        "_name": "_46a9eec6"
+      },
+      {
+        "name": "MyAccount-OrderHistory___german",
+        "path": "OrderHistory",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/OrderHistory.vue",
+        "chunkName": "pages/MyAccount/OrderHistory",
+        "_name": "_f137a21c"
+      },
+      {
+        "name": "MyAccount-ShippingDetails___german",
+        "path": "ShippingDetails",
+        "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount/ShippingDetails.vue",
+        "chunkName": "pages/MyAccount/ShippingDetails",
+        "_name": "_3c93b2d8"
+      }
+    ],
+    "_name": "_642052d3"
+  },
+  {
+    "name": "Page___german",
+    "path": "/german/Page",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Page.vue",
+    "chunkName": "pages/Page",
+    "_name": "_3ca2178d"
+  },
+  {
+    "name": "Product___german",
+    "path": "/german/Product",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Product.vue",
+    "chunkName": "pages/Product",
+    "_name": "_1d83073e"
+  },
+  {
+    "name": "reset-password___german",
+    "path": "/german/reset-password",
+    "alias": "/customer/account/createPassword",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/ResetPassword.vue",
+    "_name": "_71cf0908"
+  },
+  {
+    "name": "ResetPassword___german",
+    "path": "/german/ResetPassword",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/ResetPassword.vue",
+    "chunkName": "pages/ResetPassword",
+    "_name": "_71cf0908"
+  },
+  {
+    "name": "Shipping___german",
+    "path": "/german/Shipping",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Shipping.vue",
+    "chunkName": "pages/Shipping",
+    "_name": "_360eefa8"
+  },
+  {
+    "name": "my-account___default",
+    "path": "/default/my-account/:pageName?",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount.vue",
+    "_name": "_642052d3"
+  },
+  {
+    "name": "my-account___german",
+    "path": "/german/my-account/:pageName?",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/MyAccount.vue",
+    "_name": "_642052d3"
+  },
+  {
+    "name": "product___default",
+    "path": "/default/p/:id/:slug",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Product.vue",
+    "_name": "_1d83073e"
+  },
+  {
+    "name": "product___german",
+    "path": "/german/p/:id/:slug",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Product.vue",
+    "_name": "_1d83073e"
+  },
+  {
+    "name": "category___default",
+    "path": "/default/c/:slug_1/:slug_2?/:slug_3?/:slug_4?/:slug_5?",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Category.vue",
+    "_name": "_16203f7c"
+  },
+  {
+    "name": "category___german",
+    "path": "/german/c/:slug_1/:slug_2?/:slug_3?/:slug_4?/:slug_5?",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Category.vue",
+    "_name": "_16203f7c"
+  },
+  {
+    "name": "page___default",
+    "path": "/default/:slug+",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Page.vue",
+    "_name": "_3ca2178d"
+  },
+  {
+    "name": "page___german",
+    "path": "/german/:slug+",
+    "component": "/home/addweb/Desktop/adi/vsf-addcomProject/pages/Page.vue",
+    "_name": "_3ca2178d"
+  }
+]

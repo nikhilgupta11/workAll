@@ -1,0 +1,13 @@
+.cart-page {
+    .sf-collected-product {
+        &:hover::after {
+            content: unset !important;
+        }
+        .sf-circle-icon {
+            display: none;
+        }
+        .sf-collected-product__actions {
+            display: none;
+        }
+    }
+}

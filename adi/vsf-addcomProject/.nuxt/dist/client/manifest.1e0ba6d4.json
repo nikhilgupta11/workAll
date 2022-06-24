@@ -1,0 +1,10 @@
+{
+  "name": "@vue-storefront/magento-theme",
+  "short_name": "@vue-storefront/magento-theme",
+  "icons": [],
+  "start_url": "/?standalone=true",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#5ECE7B",
+  "lang": "en"
+}

@@ -1,0 +1,35 @@
+.extend{
+    margin-top: 50px;
+    }
+    .sf-radio{
+    width: 40px;
+    padding-bottom: 6px;
+    }
+    .one{
+    display: flex;
+    width: 105px;
+    height: 20PX;
+    margin: 10px;
+    }
+    .lii {
+    display: flex;
+    width: 305px;
+    margin-bottom: 20px;
+    height: 34px;
+    padding-left: 50px;
+    }
+.info {
+    .sf-radio {
+        width: 100% !important;
+    }
+}
+
+
+.shipping-provider {
+    .sf-radio.sf-radio--transparent {
+        z-index: 1;
+    }
+    .accordion {
+        z-index: 999999;
+    }
+}

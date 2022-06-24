@@ -1,0 +1,111 @@
+#my-account {
+.heading{
+    font-size: 24px;
+}
+.info{
+    float: right;
+    // left: 5%;
+    // right: 5%;
+    // top: 5%;
+    margin-top: -50px;
+    // height: 28.8px;
+    // width: 28.8px;
+}
+.shippinga{
+    margin-top: 40px;
+}
+.billinga{
+    float: right;
+    margin-top: -42px;
+    margin-right: 210px;
+}
+.card{
+    display: block;
+}
+.pricefont{
+    font-size: 50px;
+}
+.address{
+    display:inline-block;
+    margin-top: 100px;
+    margin-left: -110px;
+}
+.billingaddress{
+    display: flex;
+    margin-top: -129px;
+    margin-left: 435px;
+}
+.shippingdetails{
+    margin-top: 0px;
+    float: left;
+}
+.billingingdetails{
+    float: right;
+    margin-right: 225px;
+    margin-top: 40px;
+}
+.orderitem{
+    float: left;
+    margin-left: -200px;
+    margin-top: 210px;
+}
+.textaddress{
+    color: black;
+}
+.colo{
+    color: black;
+}
+
+.addresses__address{
+    margin-top: 56px;
+}
+.orderitems{
+    margin-top: 230px;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+}
+.oitem{
+    margin-top: 20px;
+}
+.odescription{
+    margin-top: 20px;
+}
+.ocolor{
+    margin-left: 120px;
+    margin-top: 20px;
+}
+.osize{
+    margin-top: 20px;
+}
+.oquantity{
+    margin-top: 20px;
+}
+.oamount{
+    margin-top: 20px;
+    margin-left: 40px;
+    
+}
+.descriptionfor{
+    margin-left: 90px;
+}
+.colorfor{
+    margin-left: 305px;
+    margin-top: -50px;
+}
+.sizefor{
+    margin-left: 58px;
+}
+.qtyfor{
+    margin-left: -5px;
+}
+.pricefor{
+    margin-left: 50px;
+}
+.sf-table__row{
+    height: 80px;
+}
+}
+

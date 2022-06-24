@@ -1,0 +1,59 @@
+.sf-header {
+  .sf-mega-menu__content {
+  @media (min-width: 1024px) {
+  padding: 0 !important;
+  }
+  }
+  // .sf-mega-menu__menu {
+  // min-height: 800px;
+  // height: 100%;
+  // overflow: hidden;
+  // }
+  
+  .categories-topMain {
+  background-color: #ffffff;
+  min-height: 800px;
+  height: 100%;
+  }
+  .subCategories-header {
+  background: #f9f9f9;
+  min-height: 450px;
+  height: 100%;
+  }
+  
+  .sf-mega-menu {
+  background: #ffffff;
+  min-width: 1440px;
+  width: 100%;
+  min-height: 450px;
+  height: 100%;
+  left: 0;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  }
+  
+  .menu_item_category a {
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #3c3c3c;
+  }
+  
+  .menu_item_category a:hover {
+  color: #037ee6;
+  }
+  
+  .sf-menu-item__label:hover {
+  color: #037ee6;
+  }
+  
+  .menu_item_sub_category a {
+  font-size: 14px;
+  font-weight: 400;
+  color: #3c3c3c;
+  }
+  
+  .menu_item_sub_category a:hover {
+  color: #037ee6;
+  }
+  }

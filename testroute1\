@@ -1,0 +1,286 @@
+<template>
+  <div>
+    <!-- <p>{{ url }}</p> -->
+    <!-- <h1>{{ urlCode }}</h1> -->
+    <!-- <h1>{{ secondApi }}</h1> -->
+    <h1>{{ token }}</h1>
+    <div>
+      <a class="button is-primary" :href="url">redirect me</a>
+      <!-- <button @click="secondApi()">secondApi</button> -->
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import { ref } from '@vue/composition-api';
+
+export default {
+  name: 'TestRoute',
+  setup(props, vm) {
+    const url = ref('');
+    const token = ref('');
+    const urlCode = vm.root.$route.query.code;
+
+    const apitoken = () =>
+      axios
+        .get(
+          'https://google-service-dev.api.pilotcity.com/google-auth-url?redirect_uri=http://localhost:8080/testroute',
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('apollo-token')}`
+            }
+          }
+        )
+
+        .then(res => {
+          url.value = res.data.data;
+          return axios
+            .get(
+              `https://google-service-dev.api.pilotcity.com/google-auth-token?code=${urlCode}&redirect_uri=http://localhost:8080/testroute`,
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('apollo-token')}`
+                }
+              }
+            )
+            .then(res => {
+              token.value = res.data.data.access_token;
+              return console.log(res.data.data.access_token);
+            })
+            .catch(err => console.log(err.response));
+        });
+
+    // const secondApi = () =>
+    //   axios
+    //     .get(
+    //       `https://google-service-dev.api.pilotcity.com/google-auth-token?code=${urlCode}&redirect_uri=http://localhost:8080/testroute`,
+    //       {
+    //         headers: {
+    //           Authorization: `Bearer ${localStorage.getItem('apollo-token')}`
+    //         }
+    //       }
+    //     )
+    //     .then(res => console.log(res.data))
+    //     .catch(err => console.log(err.response));
+    return {
+      apitoken,
+      url,
+      urlCode,
+      token
+      // secondApi
+    };
+  },
+  mounted() {
+    this.apitoken();
+    // this.secondApi();
+  }
+};
+</script>
+
+
+
+id - dericklee510@gmail.com
+pass - password
+
+email - bhavik.c@addwebsolution.in
+pass. - Addweb@123
+
+<template>
+  <div>
+    <h1>{{ token }}</h1>
+    <!-- <h1>{{ $route.query }}</h1> -->
+    <div>
+      <a class="button is-primary" :href="url">redirect me</a>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import { ref, watch, computed } from '@vue/composition-api';
+
+export default {
+  name: 'TestRoute',
+  setup(props, vm) {
+    const url = ref('');
+    const token = ref('');
+    // const urlCode = vm.root.$route.query.code;
+    const firstUrl = vm.root.$route;
+    console.log(firstUrl);
+    const urlCode1 = computed(() => {
+      return vm.root.$route.query.code;
+    });
+    const urlCode = ref(urlCode1);
+
+    // const apitoken = () => {
+    //   if (url.value.length === 0) {
+    // const apitoken = () =>
+    // watch(firstUrl => {
+
+    const apitoken = () => {
+      if (firstUrl === '/testroute') {
+        axios
+          .get(
+            'https://google-service-dev.api.pilotcity.com/google-auth-url?redirect_uri=http://localhost:8080/testroute',
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('apollo-token')}`
+              }
+            }
+          )
+
+          .then(res => {
+            url.value = res.data.data;
+          });
+      }
+    };
+    // });
+    // }
+    // };
+    // const apiSecond = () => {
+    //   if (urlCode.value.length === 0) {
+    //     console.log('if doen');
+    watch(urlCode => {
+      axios
+        .get(
+          `https://google-service-dev.api.pilotcity.com/google-auth-token?code=${urlCode}&redirect_uri=http://localhost:8080/testroute`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('apollo-token')}`
+            }
+          }
+        )
+        .then(res => {
+          token.value = res.data.data.access_token;
+          console.log(res.data.data.access_token);
+        })
+        .catch(err => console.log(err.response));
+    });
+    // }
+    // };
+    // const watchFunction = () => {
+    //   const uri = vm.root.$route.query.code;
+    //   console.log(uri);
+    //   if (uri.length > 1) {
+    //     return true;
+    //   }
+    //   return true;
+    // };
+    // watch(watchFunction, (newvalue, oldValue) => {
+    //   console.log(newvalue);
+    //   console.log(oldValue);
+    // });
+    return {
+      url,
+      urlCode,
+      token,
+      apitoken
+      // apiSecond
+
+      // watchFunction
+    };
+  },
+  mounted() {
+    this.apitoken();
+    // this.apiSecond();
+  }
+};
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<template>
+  <div>
+    <h1>{{ token }}</h1>
+    <div>
+      <a class="button is-primary" :href="redirectUrl">redirect me</a>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import { ref, watch } from '@vue/composition-api';
+// import { watch } from 'vue';
+
+export default {
+  name: 'TestRoute',
+  setup(props, vm) {
+    // const firstApiUrl = computed(() => {
+    //   return vm.root.$route;
+    // });
+    const firstApiUrl = ref(vm.root.$route);
+    // const firstApiUrl = ref('');
+    const redirectUrl = ref('');
+    const urlCode = ref(vm.root.$route.query.code);
+    const token = ref('');
+    console.log(firstApiUrl);
+    console.log(firstApiUrl.value.fullPath.indexOf('testroute'));
+    console.log(urlCode);
+
+    watch(firstApiUrl, async (newvalue, oldvalue) => {
+      console.log(newvalue);
+      if (newvalue.value.fullPath.indexOf('testroute') === 1) {
+        console.log(newvalue.value.fullPath.indexOf('testroute'));
+        try {
+          axios
+            .get(
+              'https://google-service-dev.api.pilotcity.com/google-auth-url?redirect_uri=http://localhost:8080/testroute',
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('apollo-token')}`
+                }
+              }
+            )
+
+            .then(res => {
+              redirectUrl.value = res.data.data;
+            });
+        } catch (error) {
+          redirectUrl.value = 'error....';
+        }
+      }
+    });
+
+    watch(urlCode, async (newvalue, oldvalue) => {
+      if (newvalue.indexOf('4') === 1) {
+        try {
+          axios
+            .get(
+              `https://google-service-dev.api.pilotcity.com/google-auth-token?code=${urlCode}&redirect_uri=http://localhost:8080/testroute`,
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('apollo-token')}`
+                }
+              }
+            )
+            .then(res => {
+              token.value = res.data.data.access_token;
+              console.log(res.data.data.access_token);
+            })
+            .catch(err => console.log(err.response));
+        } catch (error) {
+          token.value = 'error....';
+        }
+      }
+    });
+    return {
+      firstApiUrl,
+      redirectUrl,
+      urlCode,
+      token
+    };
+  }
+};
+</script>
+
+

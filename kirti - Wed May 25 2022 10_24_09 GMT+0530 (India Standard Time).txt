@@ -1,0 +1,208 @@
+<template>
+  <div id="product">
+    <div class="bread">
+      <router-link to="/default">
+        Home &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp; Compare Your Item
+      </router-link>
+    </div>
+    <div class="compOuter">
+      <table  class="data table table-comparison">
+         <tbody>
+          <tr >
+            <th scope="row" class="cell label product"></th>
+            <td v-for="product in data" :key="product"> 
+                <SfProductCard
+                  :key="product"
+                  :image="product.thumbnail.url"
+                  :imageWidth="216"
+                  :imageHeight="326"
+                  badgeLabel=""
+                  badgeColor=""
+                  :title="product.name"
+                  linkTag=""
+                  specialPrice=""
+                  :regularPrice="
+                    'as low as $' +
+                    product.price_range.minimum_price.final_price.value
+                  "
+                  :scoreRating="4"
+                  :reviewsCount="product.review_count"
+                  :maxRating="5"
+                  wishlistIcon="heart"
+                  isInWishlistIcon="heart_fill"
+                  :isInWishlist="false"
+                  showAddToCartButton
+                  :isAddedToCart="
+                    localePath(
+                      `/p/${product.sku}/${product.name.replaceAll(' ', '-')}+.html`
+                    )
+                  "
+                  :addToCartDisabled="false"
+                  :link="
+                    localePath(
+                      `/p/${product.sku}/${product.name.replaceAll(' ', '-')}+.html`
+                    )
+                  "
+                />
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="cell label"><span class="attribute label">SKU</span></th>
+            <td class="cell product attribute" v-for="product in data" :key="product"><p class="attribute value">{{ product.sku }}</p></td>
+          </tr>
+          <tr>
+            <th scope="row" class="cell label desc"><span class="attribute label">
+              Description</span></th>
+            <td class="cell product attribute" v-for="product in data" :key="product"><p class="attribute value" v-html="product.description.html"></p></td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <div class="compcard" v-for="product in data">
+        <SfProductCard
+          :key="product"
+          :image="product.thumbnail.url"
+          :imageWidth="216"
+          :imageHeight="326"
+          badgeLabel=""
+          badgeColor=""
+          :title="product.name"
+          linkTag=""
+          specialPrice=""
+          :regularPrice="
+            'as low as $' + product.price_range.minimum_price.final_price.value
+          "
+          :scoreRating="4"
+          :reviewsCount="product.review_count"
+          :maxRating="5"
+          wishlistIcon="heart"
+          isInWishlistIcon="heart_fill"
+          :isInWishlist="false"
+          showAddToCartButton
+          :isAddedToCart="
+            localePath(
+              `/p/${product.sku}/${product.name.replaceAll(' ', '-')}+.html`
+            )
+          "
+          :addToCartDisabled="false"
+          :link="
+            localePath(
+              `/p/${product.sku}/${product.name.replaceAll(' ', '-')}+.html`
+            )
+          "
+        />
+        <p v-html="product.description.html"></p>
+        <p>{{product.sku}}</p>
+      </div> -->
+    </div>
+  </div>
+</template>
+
+<script>
+import { computed, defineComponent } from "@nuxtjs/composition-api";
+import { SfProductCard } from "@storefront-ui/vue";
+import store from "./store";
+// import productGetters from "@vue-storefront/magento";
+export default defineComponent({
+  name: "CategoryPage",
+  components: {
+    SfProductCard,
+  },
+
+  setup() {
+    const data = computed(() => {
+      return store.state.addedItem;
+    });
+    // console.log(data);
+    // const desc = data.value.map((value) => value.description.html);
+    // console.log(desc)
+
+    // const parser = new DOMParser();
+    // const document = parser.parseFromString(desc[0], "text/html");
+
+    // const arrValue = desc.map((val)=>val.indexOf('</p>'))
+    // console.log(arrValue)
+    // const arrValue1 = desc[0].indexOf('</p>')
+    // const shortDescription = desc[0].slice(3,arrValue1)
+    // console.log(shortDescription)
+
+    // console.log(productGetters)
+
+    return {
+      data,
+      // desc,
+
+      // shortDescription,
+
+      // productGetters
+    };
+  },
+});
+</script>
+
+<style scoped>
+.compOuter {
+  display: flex;
+  margin: 50px;
+  /* display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto; */
+}
+.compcard {
+  /* display: flex;
+  margin-left: 100px; */
+  /* margin-top: 20px; */
+  /* outline: dotted; */
+  width: 280px;
+  margin: 20px;
+}
+.bread {
+  display: flex;
+}
+.table-comparison {
+    table-layout: fixed;
+}
+.table-comparison .cell.product.label {
+    border-bottom: 1px solid #ccc;
+}
+.table-comparison .cell {
+    padding: 15px;
+    width: 180px;
+}
+.table-comparison .cell.label .attribute.label {
+    display: block;
+    width: 100%;
+    word-wrap: break-word;
+}
+.table-comparison .cell.label {
+    border-right: 1px solid #ccc;
+}
+.table>tbody+tbody {
+    border-top: 1px solid #ccc;
+}
+.table-comparison .cell .attribute.value {
+    overflow: hidden;
+    width: 100%;
+}
+.table-comparison .cell {
+    padding: 15px;
+    width: 180px;
+}
+.table-wrapper.comparison .table-comparison>tbody>tr>th, .table-wrapper.comparison .table-comparison>tbody>tr>td {
+    border-top: 0;
+}
+.desc {
+  display: flex;
+} 
+table {
+  display: block;
+  height: auto;
+  width: 1900px;
+  overflow-x: scroll;
+}
+
+/* table::-webkit-scrollbar{
+}
+table::-webkit-scrollbar-thumb{   
+}
+table::-webkit-scrollbar-thumb:window-inactive{
+} */
+</style>

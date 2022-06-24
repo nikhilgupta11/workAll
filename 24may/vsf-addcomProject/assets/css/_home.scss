@@ -1,0 +1,21 @@
+.sf-banner__wrapper-desktop {
+    max-width: 414px;
+    span.sf-banner__subtitle {
+        // font-family: $source-sans !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        color: #3C3C3C;
+    }
+}
+
+.sf-banner-grid__col.sf-banner-grid__col--medium,
+section.sf-banner.sf-banner--slim.desktop-only {
+    .sf-banner__wrapper-desktop {
+        span,
+        .sf-banner__subtitle {
+            color: #F9F9F9 !important;
+        }
+    }
+}

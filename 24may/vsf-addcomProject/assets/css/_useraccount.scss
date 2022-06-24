@@ -1,0 +1,73 @@
+.user{
+  .check{
+    background-color: #EFEFEF;
+    color: black;
+  }
+  .addd {
+    background-color: rgb(24, 23, 23);
+    color: aliceblue;
+    margin-top: 2rem;
+  }
+  .ffff {
+    background-color: #037ee6;
+    width: 400px;
+  }}
+  #checkout{
+.main {
+    display: flex;
+  
+    left: 18.75%;
+    right: 18.75%;
+    top: 18.75%;
+    bottom: 18.75%;
+    .svg-image {
+        fill: currentColor;
+        margin: 10px;
+        color: #037ee6;
+        padding-top: 10px;
+      } 
+  }
+  
+  .dev {
+    display: flex;
+    width: 300px;
+  
+    #p {
+      margin-bottom: 10px;
+    }
+  }
+  .addd {
+    background-color: rgb(24, 23, 23);
+    color: aliceblue;
+    margin-top: 2rem;
+  }
+  .ffff {
+    background-color: #037ee6;
+  }
+
+.sf-characteristic__icon {
+  --icon-color: blue;
+}
+  
+
+.promo-code__button[data-v-7c00ed64] {
+  background-color: blue;
+  --button-width: 6.3125rem;
+  --button-height: var(--spacer-lg);
+}
+
+.sf-steps__step.current,
+.sf-steps__step.done {
+  --steps-step-color: #037ee6;
+  --steps-step-cursor: default;
+  --step-font-weight: var(--font-weight--normal);
+}
+.sf-steps__progress {
+  --_steps-progress-width: 25%;
+  --_steps-progress-active-step: 1;
+  background-color: #037ee6;
+}
+.sf-steps__step::after {
+  background-color: #037ee6;
+}
+}
